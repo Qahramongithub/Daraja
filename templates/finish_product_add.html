@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakaz Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .btn {
+            display: inline-block; /* Inline elementni blok ko‘rinishga keltiradi */
+            padding: 10px 20px; /* Ichki bo‘shliq */
+            font-size: 16px; /* Shrift hajmi */
+            color: #fff; /* Matn rangi */
+            background-color: #007bff; /* Tugmacha foni (ko‘k rang) */
+            text-decoration: none; /* Underline olib tashlash */
+            border: none; /* Chegara yo‘q */
+            border-radius: 5px; /* Burchaklarni yumaloqlash */
+            transition: background-color 0.3s ease; /* Hover effekti */
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Hover paytida foni o‘zgaradi */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a href="{% url 'product_create' %}" class="btn">Yarm Tayor Maxsulot qo'shish</a>
+        <a href="{% url 'admin:index' %}" class="btn">Admin Panel</a>
+        <a href="{% url 'finish_product_list' %}" class="btn">Tayor maxsulotlar ro'yxati</a>
+        <a href="{% url 'product_list' %}" class="btn">Yarm Tayor Maxsulotlar ro'yxati</a>
+    </div>
+    <h1>Tayor Maxsulotlar Qo'shish</h1>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="category">Nomi:</label>
+            <select id="category" name="nomi" required>
+                {% for category in categories %}
+                    <option value={{ category.id }}>{{ category.nomi }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="soni">soni:</label>
+            <input type="number" id="soni" name="soni" placeholder="Tayor maxsulot soni " required>
+        </div>
+        <button type="submit" class="btn">Yuborish</button>
+    </form>
+</div>
+</body>
+</html>
